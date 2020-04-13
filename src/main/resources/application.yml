@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: server
+    name: backend
 ---
 #tag::cors[]
 micronaut:
