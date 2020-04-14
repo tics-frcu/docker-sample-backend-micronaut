@@ -16,6 +16,6 @@ public class HolaController {
     @Get("/{nombre}")
     HttpResponse<String> hola(String nombre) {
         LOG.info("Recibida solicitud: " + nombre);
-        return HttpResponse.ok("Hola, " + nombre + "!");
+        return HttpResponse.ok("Hola, " + nombre + "!\n");
     }
 }
