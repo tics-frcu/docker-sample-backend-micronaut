@@ -1,16 +1,17 @@
 #
 # Primera etapa - container para build
+# Uso la imagen Gradle 5.3 (basada en openjdk:8-jdk)
 #
-FROM openjdk:8-jdk as builder
+FROM gradle:5.3-jdk8 as builder
 
 # Defino el workdir
-WORKDIR /app
+WORKDIR /home/gradle
 
 # Agrego el código del proyecto al Workdir
-ADD . /app
+ADD . /home/gradle
 
 # Compilo la aplicación (como un fat jar)
-RUN ./gradlew assemble --no-build-cache --no-daemon
+RUN gradle assemble --no-build-cache --no-daemon
 
 #
 # Segunda etapa - container de aplicación
@@ -19,7 +20,7 @@ FROM openjdk:8-jre-alpine
 
 # Creo un directorio y copio el fat jar desde el builder
 RUN mkdir /app
-COPY --from=builder /app/build/libs/app-*all.jar /app/application.jar
+COPY --from=builder /home/gradle/build/libs/*all.jar /app/application.jar
 
 # El puerto en el que escuchará la app es el 8080
 EXPOSE 8080
