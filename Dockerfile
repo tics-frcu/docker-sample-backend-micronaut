@@ -1,17 +1,17 @@
-# Uso la imagen OpejJDK versión 8
-FROM openjdk:8-jdk
+# Uso la imagen Gradle 5.3 (basada en openjdk:8-jdk)
+FROM gradle:5.3-jdk8
 
 # Defino el workdir
-WORKDIR /app
+WORKDIR /home/gradle
 
 # Agrego el código del proyecto al Workdir
-ADD . /app
+ADD . /home/gradle
 
 # Compilo la aplicación (como un fat jar)
-RUN ./gradlew assemble --no-build-cache --no-daemon
+RUN gradle assemble --no-build-cache --no-daemon
 
 # Copio el fat jar a la raíz del Workdir
-RUN cp build/libs/app-*all.jar application.jar
+RUN cp build/libs/*all.jar application.jar
 
 # El puerto en el que escuchará la app es el 8080
 EXPOSE 8080
