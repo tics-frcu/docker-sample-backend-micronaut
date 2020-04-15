@@ -7,10 +7,17 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Produces;
 import org.slf4j.*;
 
-@Controller
+@Controller("/hola")
 public class HolaController {
 
     private static final Logger LOG = LoggerFactory.getLogger(HolaController.class);
+
+    @Produces(MediaType.TEXT_PLAIN)
+    @Get("/")
+    HttpResponse<String> hola() {
+        LOG.info("Recibida solicitud sin nombre...");
+        return HttpResponse.ok("Hola Mundo!\n");
+    }
 
     @Produces(MediaType.TEXT_PLAIN)
     @Get("/{nombre}")
