@@ -17,6 +17,7 @@ RUN cp build/libs/*all.jar application.jar
 EXPOSE 8080
 
 # Ejecuto el container y paso las opciones de ejecución a la JVM
-CMD ["java", "-jar", "-XX:+UseContainerSupport", "-Djava.security.egd=file:/dev/./urandom", "application.jar"]
+CMD ["java", "-jar", "-XX:+UseContainerSupport", \
+     "-Djava.security.egd=file:/dev/./urandom", "application.jar"]
 # Equivalente a :
 # java -jar -XX:+UseContainerSupport -Djava.security.egd=file:/dev/./urandom application.jar
